@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: deploying application to EC2
         env:
           PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY  }}
