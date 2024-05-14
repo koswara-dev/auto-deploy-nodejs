@@ -15,13 +15,13 @@ jobs:
 
       - name: Set up SSH key
         uses: webfactory/ssh-agent@v0.9.0
-        
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+          
       - name: deploying application to EC2
         env:
-          PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY  }}
           HOSTNAME: ${{ secrets.SERVER_HOST  }}
           USER_NAME: ${{ secrets.SERVER_USERNAME  }}
 
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} bash auto-deploy.sh
+          ssh -o StrictHostKeyChecking=no -p 22 ${USER_NAME}@${HOSTNAME} bash auto-deploy.sh
