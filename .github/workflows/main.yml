@@ -20,8 +20,9 @@ jobs:
           
       - name: deploying application to EC2
         env:
-          HOSTNAME: ${{ secrets.SERVER_HOST  }}
-          USER_NAME: ${{ secrets.SERVER_USERNAME  }}
+          HOSTNAME: ${{ secrets.SERVER_HOST }}
+          USER_NAME: ${{ secrets.SERVER_USERNAME }}
+          PORT: ${{ secrets.SERVER_PORT }}
 
         run: |
-          ssh -o StrictHostKeyChecking=no -p 22 ${USER_NAME}@${HOSTNAME} bash auto-deploy.sh
+          ssh -o StrictHostKeyChecking=no -p ${PORT} ${USER_NAME}@${HOSTNAME} bash auto-deploy.sh
